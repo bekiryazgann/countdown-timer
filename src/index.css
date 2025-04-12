@@ -1,1 +1,33 @@
 @import "tailwindcss";
+
+.page-content{
+    @apply flex flex-col gap-6
+}
+
+.page-content p, .page-content ul li{
+    @apply text-white text-lg leading-8
+}
+
+.page-content h3{
+    @apply text-3xl text-blue-300/5 font-semibold mt-6
+}
+
+.page-content h4{
+    @apply text-2xl text-blue-300/5 font-semibold mt-6
+}
+
+.page-content img{
+    @apply rounded-lg shadow-[4px_4px_0px_0px_rgba(251,_82,_35,_1)]
+}
+
+.page-content ul{
+    @apply flex flex-col gap-2 pl-6 list-disc
+}
+
+.page-content blockquote{
+    @apply pl-5 border-l-4 border-l-blue-300/30 font-medium italic text-lg leading-7 py-2
+}
+
+.page-content a{
+    @apply text-blue-300/5 underline transition-all duration-300
+}
