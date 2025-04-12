@@ -1,12 +1,19 @@
-import {ArrowRight} from "lucide-react"
+import {ArrowLeft, ArrowRight} from "lucide-react"
 import contents from "../../data/contents.ts";
 import {Link} from "react-router-dom"
+import PageAnimation from "../../components/page-animation";
 
 export default function ContentsPage(){
     return (
+        <PageAnimation>
         <div className="text-white p-8 overflow-x-hidden select-none">
             <div className="max-w-2xl mx-auto">
-                <h3 className="text-4xl font-bold"> Yazılar </h3>
+                <div className="flex items-center gap-4">
+                    <Link to="/">
+                        <ArrowLeft className="w-[2.441rem] h-[2.441rem] text-white/50 " />
+                    </Link>
+                    <h3 className="text-4xl font-bold"> Yazılar </h3>
+                </div>
                 <div className="flex flex-col gap-4 mt-6">
                     {contents.map((content, index) => (
                         <Link
@@ -24,5 +31,6 @@ export default function ContentsPage(){
                 </div>
             </div>
         </div>
+        </PageAnimation>
     );
 }
