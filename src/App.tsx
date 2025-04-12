@@ -49,7 +49,7 @@ function App() {
    };
 
    useEffect(() => {
-      const music = new Audio("/public/music.wav");
+      const music = new Audio("/music.wav");
 
       window.addEventListener("click", () => {
          music.play();
