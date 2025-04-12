@@ -9,6 +9,7 @@ interface Emoji {
 }
 
 function App() {
+   const music = new Audio("/music.wav");
    const [timeLeft, setTimeLeft] = useState({
       days: 0,
       hours: 0,
@@ -16,20 +17,21 @@ function App() {
       seconds: 0,
    });
    const [emojis, setEmojis] = useState<Emoji[]>([]);
+   const [isPlaying, setIsPlaying] = useState(false);
 
-   // Function to handle click on "seni seviyorum" text
-   const handleLoveClick = () => {
+   // Function to generate and display emojis
+   const generateEmojis = () => {
       // Array of love-related emojis
       const loveEmojis = ['❤️', '❤️', '❤️', '❤️', '❤️', '❤️', '❤️', '❤️', '❤️', '❤️', '❤️', '❤️', '❤️', '❤️',];
 
       // Generate 5-10 random emojis
-      const emojiCount = Math.floor(Math.random() * 6) + 5;
+      const emojiCount = Math.floor(Math.random() * 6) + 100;
       const newEmojis: Emoji[] = [];
 
       for (let i = 0; i < emojiCount; i++) {
          // Generate random position around the text
          const left = 45 + Math.random() * 10; // 45-55% from left
-         const top = 80 + Math.random() * 5; // 80-85% from top
+         const top = 90 + Math.random() * 5; // 80-85% from top
 
          newEmojis.push({
             id: Date.now() + i,
@@ -49,12 +51,33 @@ function App() {
    };
 
    useEffect(() => {
-      const music = new Audio("/music.wav");
-
-      window.addEventListener("click", () => {
-         music.play();
-      });
+      window.addEventListener('click', () => {
+         if (!isPlaying) {
+            setIsPlaying(true);
+            music.play();
+            generateEmojis();
+         }
+      })
    }, []);
+
+   // Effect to continuously generate emojis while music is playing
+   useEffect(() => {
+      let emojiInterval: number | null = null;
+
+      if (isPlaying) {
+         // Generate emojis every 2 seconds while music is playing
+         emojiInterval = window.setInterval(() => {
+            generateEmojis();
+         }, 2000);
+      }
+
+      // Clean up interval when music stops or component unmounts
+      return () => {
+         if (emojiInterval !== null) {
+            clearInterval(emojiInterval);
+         }
+      };
+   }, [isPlaying]);
 
    useEffect(() => {
       const targetDate = new Date("2025-04-19T06:00:00");
@@ -164,7 +187,6 @@ function App() {
             <div
                className="fixed bottom-5 left-1/2 -translate-x-1/2 text-gray-300 cursor-pointer"
                translate="no"
-               onClick={handleLoveClick}
             >
                seni seviyorum
             </div>
