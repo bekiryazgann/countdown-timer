@@ -104,7 +104,7 @@ function App() {
    `;
 
    return (
-      <div className="min-h-screen flex flex-col justify-center items-center bg-black text-white p-8 fixed top-0 left-0 w-screen h-screen overflow-hidden">
+      <div className="min-h-screen flex flex-col justify-center items-center bg-black text-white p-8 fixed top-0 left-0 w-screen h-screen overflow-hidden select-none">
          <style>{emojiAnimationStyle}</style>
          <div className="grid grid-cols-3 items-center gap-2">
             <div className="bg-white/10 backdrop-blur-lg rounded-xl p-8 min-w-[200px] transition-transform duration-300 col-span-3 flex items-center justify-center flex-col gap-2">
