@@ -31,3 +31,17 @@
 .page-content a{
     @apply text-blue-300/5 underline transition-all duration-300
 }
+
+@keyframes floatUp {
+    0% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-100px) scale(1.5);
+        opacity: 0;
+    }
+}
+.emoji-animation {
+    animation: floatUp 3s ease-out forwards;
+}
