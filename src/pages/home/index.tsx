@@ -2,6 +2,7 @@ import {useState, useEffect} from "react";
 import {Link} from "react-router-dom";
 import {useMusicStore} from "../../store/music.ts";
 import PageAnimation from "../../components/page-animation";
+import {motion, AnimatePresence} from "framer-motion";
 
 // Define the Emoji interface
 interface Emoji {
@@ -36,7 +37,7 @@ export default function HomePage() {
         const loveEmojis = ['❤️', '❤️', '❤️', '❤️', '❤️', '❤️', '❤️', '❤️', '❤️', '❤️', '❤️', '❤️', '❤️', '❤️',];
 
         // Generate 5-10 random emojis
-        const emojiCount = Math.floor(Math.random() * 6) + 100;
+        const emojiCount = Math.floor(Math.random() * 6) + 40;
         const newEmojis: Emoji[] = [];
 
         for (let i = 0; i < emojiCount; i++) {
@@ -91,7 +92,7 @@ export default function HomePage() {
     }, [isPlaying]);
 
     useEffect(() => {
-        const targetDate = new Date("2025-04-19T12:20:00");
+        const targetDate = new Date("2025-05-03T12:20:00");
         const marryDate = new Date("2031-04-19T00:00:00");
 
         const calculateTimeLeft = () => {
@@ -139,60 +140,275 @@ export default function HomePage() {
             <div
                 className="min-h-screen flex flex-col justify-center items-center bg-black text-white p-8 fixed top-0 left-0 w-screen h-screen overflow-hidden select-none">
                 <div className="grid grid-cols-3 items-center gap-2">
-                    <div className="bg-white/10 backdrop-blur-lg rounded-xl p-8 min-w-[200px] transition-transform duration-300 col-span-3 flex items-center justify-center flex-col gap-2">
-                        <span className="text-5xl md:text-6xl font-bold block text-white " translate="no">
-                            {timeLeft.days}
-                        </span>
-                        <span className="text-xl text-gray-300 uppercase tracking-wider mt-2 block" translate="no">
-                            Gün
-                        </span>
-                    </div>
-                    <div className="bg-white/10 backdrop-blur-lg rounded-xl p-8 transition-transform duration-300 flex items-center justify-center flex-col gap-2">
-                        <span className="text-4xl md:text-5xl font-bold block text-white" translate="no">
-                            {timeLeft.hours}
-                        </span>
-                        <span className="text-lg text-gray-300 uppercase tracking-wider mt-2 block" translate="no">
-                            Saat
-                        </span>
-                    </div>
-                    <div className="bg-white/10 backdrop-blur-lg rounded-xl p-8 transition-transform duration-300 flex items-center justify-center flex-col gap-2">
-                        <span className="text-4xl md:text-5xl font-bold block text-white" translate="no">
-                            {timeLeft.minutes}
-                        </span>
-                        <span className="text-lg text-gray-300 uppercase tracking-wider mt-2 block" translate="no">
-                            Dakika
-                        </span>
-                    </div>
-                    <div className="bg-white/10 backdrop-blur-lg rounded-xl p-8 transition-transform duration-300 flex items-center justify-center flex-col gap-2">
-                        <span className="text-4xl md:text-5xl font-bold block text-white">
-                            {timeLeft.seconds}
-                        </span>
-                        <span className="text-lg text-gray-300 uppercase tracking-wider mt-2 block" translate="no">
-                            Saniye
-                        </span>
-                    </div>
-                    <div className="flex items-center col-span-3">
-                        <p className="text-center w-full"> <b>{marryTimeLeft.days}</b> Gün,  <b>{marryTimeLeft.hours}</b> Saat, <b>{marryTimeLeft.minutes}</b> Dakika, <b>{marryTimeLeft.seconds}</b> Saniye </p>
-                    </div>
-
-                    <Link to="contents"
-                          className="fixed bottom-5 left-1/2 -translate-x-1/2 text-gray-300 cursor-pointer"
-                          translate="no"
+                    <motion.div 
+                        className="col-span-3 flex justify-center items-center mb-2"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ duration: 0.5 }}
                     >
-                        seni seviyorum
-                    </Link>
+                        <motion.span
+                            className="text-7xl"
+                            initial={{ scale: 1 }}
+                            animate={{ 
+                                scale: [1, 1.3, 1, 1.3, 1, 1, 1, 1, 1],
+                            }}
+                            transition={{ 
+                                duration: 1.8,
+                                repeat: Infinity, 
+                                repeatType: "loop",
+                                ease: "easeInOut"
+                            }}
+                            style={{ filter: "drop-shadow(0 0 8px rgba(255,0,0,0.5))" }}
+                        >
+                            ❤️
+                        </motion.span>
+                    </motion.div>
+                    <motion.div 
+                        className="bg-white/10 backdrop-blur-lg rounded-xl p-8 min-w-[200px] col-span-3 flex items-center justify-center flex-col gap-2"
+                        initial={{ scale: 0.9, opacity: 0 }}
+                        animate={{ scale: 1, opacity: 1 }}
+                        transition={{ duration: 0.5, delay: 0.1 }}
+                        whileHover={{ scale: 1.05 }}
+                    >
+                        <AnimatePresence mode="wait">
+                            <motion.span 
+                                key={timeLeft.days}
+                                initial={{ opacity: 0, y: -20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                exit={{ opacity: 0, y: 20 }}
+                                transition={{ duration: 0.3 }}
+                                className="text-5xl md:text-6xl font-bold block text-white" 
+                                translate="no"
+                            >
+                                {timeLeft.days}
+                            </motion.span>
+                        </AnimatePresence>
+                        <motion.span 
+                            className="text-xl text-gray-300 uppercase tracking-wider mt-2 block" 
+                            translate="no"
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            transition={{ duration: 0.3, delay: 0.2 }}
+                        >
+                            Gün
+                        </motion.span>
+                    </motion.div>
+                    <motion.div 
+                        className="bg-white/10 backdrop-blur-lg rounded-xl p-8 flex items-center justify-center flex-col gap-2"
+                        initial={{ scale: 0.9, opacity: 0 }}
+                        animate={{ scale: 1, opacity: 1 }}
+                        transition={{ duration: 0.5, delay: 0.2 }}
+                        whileHover={{ scale: 1.05 }}
+                    >
+                        <AnimatePresence mode="wait">
+                            <motion.span 
+                                key={timeLeft.hours}
+                                initial={{ opacity: 0, y: -20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                exit={{ opacity: 0, y: 20 }}
+                                transition={{ duration: 0.3 }}
+                                className="text-4xl md:text-5xl font-bold block text-white" 
+                                translate="no"
+                            >
+                                {timeLeft.hours}
+                            </motion.span>
+                        </AnimatePresence>
+                        <motion.span 
+                            className="text-lg text-gray-300 uppercase tracking-wider mt-2 block" 
+                            translate="no"
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            transition={{ duration: 0.3, delay: 0.3 }}
+                        >
+                            Saat
+                        </motion.span>
+                    </motion.div>
+                    <motion.div 
+                        className="bg-white/10 backdrop-blur-lg rounded-xl p-8 flex items-center justify-center flex-col gap-2"
+                        initial={{ scale: 0.9, opacity: 0 }}
+                        animate={{ scale: 1, opacity: 1 }}
+                        transition={{ duration: 0.5, delay: 0.3 }}
+                        whileHover={{ scale: 1.05 }}
+                    >
+                        <AnimatePresence mode="wait">
+                            <motion.span 
+                                key={timeLeft.minutes}
+                                initial={{ opacity: 0, y: -20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                exit={{ opacity: 0, y: 20 }}
+                                transition={{ duration: 0.3 }}
+                                className="text-4xl md:text-5xl font-bold block text-white" 
+                                translate="no"
+                            >
+                                {timeLeft.minutes}
+                            </motion.span>
+                        </AnimatePresence>
+                        <motion.span 
+                            className="text-lg text-gray-300 uppercase tracking-wider mt-2 block" 
+                            translate="no"
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            transition={{ duration: 0.3, delay: 0.4 }}
+                        >
+                            Dakika
+                        </motion.span>
+                    </motion.div>
+                    <motion.div 
+                        className="bg-white/10 backdrop-blur-lg rounded-xl p-8 flex items-center justify-center flex-col gap-2"
+                        initial={{ scale: 0.9, opacity: 0 }}
+                        animate={{ scale: 1, opacity: 1 }}
+                        transition={{ duration: 0.5, delay: 0.4 }}
+                        whileHover={{ scale: 1.05 }}
+                    >
+                        <AnimatePresence mode="wait">
+                            <motion.span 
+                                key={timeLeft.seconds}
+                                initial={{ opacity: 0, y: -20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                exit={{ opacity: 0, y: 20 }}
+                                transition={{ duration: 0.3 }}
+                                className="text-4xl md:text-5xl font-bold block text-white"
+                            >
+                                {timeLeft.seconds}
+                            </motion.span>
+                        </AnimatePresence>
+                        <motion.span 
+                            className="text-lg text-gray-300 uppercase tracking-wider mt-2 block" 
+                            translate="no"
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            transition={{ duration: 0.3, delay: 0.5 }}
+                        >
+                            Saniye
+                        </motion.span>
+                    </motion.div>
+                    <motion.div 
+                        className="flex items-center col-span-3"
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.6, delay: 0.5 }}
+                    >
+                        <motion.p 
+                            className="text-center w-full"
+                            whileHover={{ scale: 1.05, color: "#f8fafc" }}
+                            transition={{ duration: 0.2 }}
+                        > 
+                            <AnimatePresence mode="wait">
+                                <motion.span
+                                    key={`${marryTimeLeft.days}-${marryTimeLeft.hours}-${marryTimeLeft.minutes}-${marryTimeLeft.seconds}`}
+                                    initial={{ opacity: 0.5, y: -20 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    exit={{ opacity: 0.5, y: 20 }}
+                                    transition={{ duration: 0.3 }}
+                                >
+                                    <b className="text-white">
+                                        {marryTimeLeft.days}
+                                    </b> Gün,{" "}
+                                    <b className="text-white">
+                                        {marryTimeLeft.hours}
+                                    </b> Saat,{" "}
+                                    <b className="text-white">
+                                        {marryTimeLeft.minutes}
+                                    </b> Dakika,{" "}
+                                    <b className="text-white">
+                                        {marryTimeLeft.seconds}
+                                    </b> Saniye
+                                </motion.span>
+                            </AnimatePresence>
+                        </motion.p>
+                    </motion.div>
+
+                    <div>
+                        <motion.div>
+                            <Link to="contents"
+                                className="fixed bottom-5 left-1/2 -translate-x-1/2 text-gray-300 cursor-pointer"
+                                translate="no"
+                            >
+                                <motion.span
+                                    animate={{ 
+                                        scale: [
+                                            // . (dot)
+                                            1, 1.5, 0,
+                                            // . (dot)
+                                            1, 1.5, 0,
+                                            // - (dash - represented as waiting)
+                                            1, 1, 1,
+                                            // . (dot)
+                                            1, 1.5, 0,
+                                            // . (dot)
+                                            1, 1.5, 0,
+                                            // - (dash - represented as waiting)
+                                            1, 1, 1,
+                                            // . (dot)
+                                            1, 1.5, 0,
+                                            // . (dot)
+                                            1, 1.5, 0,
+                                            // - (dash - represented as waiting)
+                                            1, 1, 1,
+                                            // . (dot)
+                                            1, 1.5, 0,
+                                            // . (dot)
+                                            1, 1.5, 0,
+                                            // - (dash - represented as waiting)
+                                            1, 1, 1,
+                                            // . (dot)
+                                            1, 1.5, 0,
+                                            // . (dot)
+                                            1, 1.5, 0,
+                                            // - (dash - represented as waiting)
+                                            1, 1, 1
+                                        ]
+                                    }}
+                                    transition={{
+                                        duration: 8,
+                                        repeat: Infinity,
+                                        repeatType: "loop",
+                                        ease: "linear",
+                                        times: [
+                                            // Timing for each step in the animation sequence
+                                            // Each dot: scale up (0.02), scale down (0.02), pause (0.02)
+                                            // Each dash: three pauses (0.06)
+                                            0, 0.02, 0.04, 0.06, 0.08, 0.10, 0.12, 0.14, 0.16, 
+                                            0.18, 0.20, 0.22, 0.24, 0.26, 0.28, 0.30, 0.32, 0.34,
+                                            0.36, 0.38, 0.40, 0.42, 0.44, 0.46, 0.48, 0.50, 0.52,
+                                            0.54, 0.56, 0.58, 0.60, 0.62, 0.64, 0.66, 0.68, 0.70,
+                                            0.72, 0.74, 0.76, 0.78, 0.80, 0.82, 0.84, 0.86, 0.88
+                                        ]
+                                    }}
+                                >
+                                    seni seviyorum
+                                </motion.span>
+                            </Link>
+                        </motion.div>
+                    </div>
                     {emojis.map((emoji) => (
-                        <div
+                        <motion.div
                             key={emoji.id}
-                            className="fixed pointer-events-none emoji-animation"
+                            className="fixed pointer-events-none"
                             style={{
                                 left: `${emoji.left}%`,
                                 top: `${emoji.top}%`,
                                 fontSize: '24px',
                             }}
+                            initial={{ opacity: 1, y: 0, scale: 1 }}
+                            animate={{ 
+                                opacity: 0, 
+                                y: -100, 
+                                scale: [1, 1.5, 2],
+                                rotate: Math.random() > 0.5 ? [0, 15, -15, 0] : [0, -15, 15, 0]
+                            }}
+                            transition={{ 
+                                duration: 3,
+                                ease: "easeOut",
+                                times: [0, 0.3, 0.7, 1],
+                                rotate: {
+                                    duration: 2,
+                                    repeat: 1
+                                }
+                            }}
                         >
                             {emoji.symbol}
-                        </div>
+                        </motion.div>
                     ))}
                 </div>
             </div>
