@@ -141,7 +141,7 @@ export default function HomePage() {
                 className="min-h-screen flex flex-col justify-center items-center bg-black text-white p-8 fixed top-0 left-0 w-screen h-screen overflow-hidden select-none">
                 <div className="grid grid-cols-3 items-center gap-2">
                     <motion.div 
-                        className="col-span-3 flex justify-center items-center mb-2"
+                        className="col-span-3 flex justify-center items-center mb-2 hidden"
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         transition={{ duration: 0.5 }}
