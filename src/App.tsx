@@ -2,7 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import HomePage from "./pages/home";
 import ContentsPage from "./pages/contents";
 import SiirKadinPage from "./pages/contents/ pages/siir-kadin";
-import SiirIcmeyeGerekYokKiSevincePage from "./pages/contents/ pages/icmeye-gerek-yok-ki-sevince";
+import SiirIcmeyeGerekYokKiSevincePage from "./pages/contents/pages/icmeye-gerek-yok-ki-sevince";
 
 export default function App() {
    return (
