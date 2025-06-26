@@ -112,7 +112,7 @@ export default function HomePage() {
    }, [isPlaying]);
 
    useEffect(() => {
-      const targetDate = new Date("2025-06-03T11:46:00");
+      const targetDate = new Date("2025-06-28T12:21:00");
       const marryDate = new Date("2031-04-19T00:00:00");
 
       const calculateTimeLeft = () => {
